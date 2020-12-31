@@ -1,8 +1,8 @@
 ---
 description: >-
-  On Ubuntu/Debian, this guide will illustrate how to install and configure a
-  Cardano stake pool from source code on a two node setup with 1 block producer
-  node and 1 relay node.
+    On Ubuntu/Debian, this guide will illustrate how to install and configure a
+    Cardano stake pool from source code on a two node setup with 1 block producer
+    node and 1 relay node.
 ---
 
 # Guide: How to build a Cardano Stake Pool
@@ -10,11 +10,11 @@ description: >-
 ## 🎉 ∞ Pre-Announcements
 
 {% hint style="info" %}
-Thank you for your support and kind messages! It really energizes us to keep creating the best crypto guides. Use [cointr.ee to find our donation ](https://cointr.ee/coincashew)addresses. 🙏 
+Thank you for your support and kind messages! It really energizes us to keep creating the best crypto guides. Use [cointr.ee to find our donation ](https://cointr.ee/coincashew)addresses. 🙏
 {% endhint %}
 
 {% hint style="success" %}
-As of Dec 28 2020, this is **guide version 3.0.0** and written for **cardano mainnet** with **release v.1.24.2** 😁 
+As of Dec 28 2020, this is **guide version 3.0.0** and written for **cardano mainnet** with **release v.1.24.2** 😁
 {% endhint %}
 
 ## 🏁 0. Prerequisites
@@ -23,46 +23,46 @@ As of Dec 28 2020, this is **guide version 3.0.0** and written for **cardano mai
 
 As a stake pool operator for Cardano, you will be competent with the following abilities:
 
-* operational knowledge of how to set up, run and maintain a Cardano node continuously
-* a commitment to maintain your node 24/7/365
-* system operation skills
-* server administration skills \(operational and maintenance\).
+-   operational knowledge of how to set up, run and maintain a Cardano node continuously
+-   a commitment to maintain your node 24/7/365
+-   system operation skills
+-   server administration skills \(operational and maintenance\).
 
 ### 🧙 Mandatory experience for stake pool operators
 
-* experience of development and operations \(DevOps\)
-* experience on how to [harden ](https://www.lifewire.com/harden-ubuntu-server-security-4178243)and [secure a server](https://gist.github.com/lokhman/cc716d2e2d373dd696b2d9264c0287a3).
-* [passed the official Stake Pool School course.](https://cardano-foundation.gitbook.io/stake-pool-course/)
+-   experience of development and operations \(DevOps\)
+-   experience on how to [harden ](https://www.lifewire.com/harden-ubuntu-server-security-4178243)and [secure a server](https://gist.github.com/lokhman/cc716d2e2d373dd696b2d9264c0287a3).
+-   [passed the official Stake Pool School course.](https://cardano-foundation.gitbook.io/stake-pool-course/)
 
 {% hint style="danger" %}
-🛑 **Before continuing this guide, you must satisfy the above requirements.** 🚧 
+🛑 **Before continuing this guide, you must satisfy the above requirements.** 🚧
 {% endhint %}
 
 ### 🎗 Minimum Stake Pool Hardware Requirements
 
-* **Two separate servers:** 1 for block producer node, 1 for relay node
-* **One air-gapped offline machine \(cold environment\)**
-* **Operating system:** 64-bit Linux \(i.e. Ubuntu Server 20.04 LTS\)
-* **Processor:** An Intel or AMD x86 processor with two or more cores, at 1.6GHz or faster \(2GHz or faster for a stake pool or relay\)
-* **Memory:** 4GB of RAM \(8GB for a relay or stake pool\)
-* **Storage:** 10GB of free storage \(20GB for a stake pool\)
-* **Internet:** Broadband internet connection with speeds at least 10 Mbps.
-* **Data Plan**: at least 1GB per hour. 720GB per month.
-* **Power:** Reliable electrical power
-* **ADA balance:** at least 505 ADA
+-   **Two separate servers:** 1 for block producer node, 1 for relay node
+-   **One air-gapped offline machine \(cold environment\)**
+-   **Operating system:** 64-bit Linux \(i.e. Ubuntu Server 20.04 LTS\)
+-   **Processor:** An Intel or AMD x86 processor with two or more cores, at 1.6GHz or faster \(2GHz or faster for a stake pool or relay\)
+-   **Memory:** 4GB of RAM \(8GB for a relay or stake pool\)
+-   **Storage:** 10GB of free storage \(20GB for a stake pool\)
+-   **Internet:** Broadband internet connection with speeds at least 10 Mbps.
+-   **Data Plan**: at least 1GB per hour. 720GB per month.
+-   **Power:** Reliable electrical power
+-   **ADA balance:** at least 505 ADA
 
 ### 🏋♂ Recommended Future-proof Stake Pool Hardware Setup
 
-* **Three separate servers:** 1 for block producer node, 2 for relay nodes
-* **One air-gapped offline machine \(cold environment\)**
-* **Operating system:** 64-bit Linux \(i.e. Ubuntu 20.04 LTS\)
-* **Processor:** 4 core or higher CPU
-* **Memory:** 8GB+ RAM
-* **Storage:** 256GB+ SSD
-* **Internet:** Broadband internet connections with speeds at least 100 Mbps
-* **Data Plan**: Unlimited
-* **Power:** Reliable electrical power with UPS
-* **ADA balance:** more pledge is better, to be determined by **a0**, the pledge influence factor
+-   **Three separate servers:** 1 for block producer node, 2 for relay nodes
+-   **One air-gapped offline machine \(cold environment\)**
+-   **Operating system:** 64-bit Linux \(i.e. Ubuntu 20.04 LTS\)
+-   **Processor:** 4 core or higher CPU
+-   **Memory:** 8GB+ RAM
+-   **Storage:** 256GB+ SSD
+-   **Internet:** Broadband internet connections with speeds at least 100 Mbps
+-   **Data Plan**: Unlimited
+-   **Power:** Reliable electrical power with UPS
+-   **ADA balance:** more pledge is better, to be determined by **a0**, the pledge influence factor
 
 ### 🔓 Recommended Stake Pool Security
 
@@ -86,7 +86,7 @@ If you are rebuilding or reusing an existing `cardano-node` installation, refer 
 
 ## 🏭 1. Install Cabal and GHC
 
-If using Ubuntu Desktop, **press** Ctrl+Alt+T. This will launch a terminal window. 
+If using Ubuntu Desktop, **press** Ctrl+Alt+T. This will launch a terminal window.
 
 First, update packages and install Ubuntu dependencies.
 
@@ -99,7 +99,7 @@ sudo apt-get upgrade -y
 ```
 
 ```text
-sudo apt-get install git jq bc make rsync htop curl build-essential pkg-config libffi-dev libgmp-dev libssl-dev libtinfo-dev libsystemd-dev zlib1g-dev make g++ wget libncursesw5 libtool autoconf -y
+sudo apt-get install automake git jq bc make rsync htop curl build-essential pkg-config libffi-dev libgmp-dev libssl-dev libtinfo-dev libsystemd-dev zlib1g-dev make g++ wget libncursesw5 libtool autoconf -y
 ```
 
 Install Libsodium.
@@ -138,7 +138,7 @@ cd ghc-8.10.2
 sudo make install
 ```
 
-Update PATH to include Cabal and GHC and add exports. Your node's location will be in **$NODE\_HOME**. The [cluster configuration](https://hydra.iohk.io/job/Cardano/iohk-nix/cardano-deployment/latest-finished/download/1/index.html) is set by **$NODE\_CONFIG** and **$NODE\_BUILD\_NUM**. 
+Update PATH to include Cabal and GHC and add exports. Your node's location will be in **$NODE_HOME**. The [cluster configuration](https://hydra.iohk.io/job/Cardano/iohk-nix/cardano-deployment/latest-finished/download/1/index.html) is set by **$NODE_CONFIG** and **$NODE_BUILD_NUM**.
 
 ```bash
 echo PATH="$HOME/.local/bin:$PATH" >> $HOME/.bashrc
@@ -227,9 +227,9 @@ wget -N https://hydra.iohk.io/build/${NODE_BUILD_NUM}/download/1/${NODE_CONFIG}-
 wget -N https://hydra.iohk.io/build/${NODE_BUILD_NUM}/download/1/${NODE_CONFIG}-config.json
 ```
 
-Run the following to modify **config.json** and 
+Run the following to modify **config.json** and
 
-* update TraceBlockFetchDecisions to "true"
+-   update TraceBlockFetchDecisions to "true"
 
 ```bash
 sed -i ${NODE_CONFIG}-config.json \
@@ -260,18 +260,19 @@ For the purposes of this guide, we will be building **two nodes** on two **separ
 {% endhint %}
 
 {% hint style="danger" %}
-Configure **topology.json** file so that 
+Configure **topology.json** file so that
 
-* relay node\(s\) connect to public relay nodes \(like IOHK and buddy relay nodes\) and your block-producer node
-* block-producer node **only** connects to your relay node\(s\)
-{% endhint %}
+-   relay node\(s\) connect to public relay nodes \(like IOHK and buddy relay nodes\) and your block-producer node
+-   block-producer node **only** connects to your relay node\(s\)
+    {% endhint %}
 
 On your **block-producer node,** run the following. Update the **addr** with your relay node's public IP address.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
-cat > $NODE_HOME/${NODE_CONFIG}-topology.json << EOF 
+cat > $NODE_HOME/${NODE_CONFIG}-topology.json << EOF
  {
     "Producers": [
       {
@@ -283,6 +284,7 @@ cat > $NODE_HOME/${NODE_CONFIG}-topology.json << EOF
   }
 EOF
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -296,12 +298,13 @@ EOF
 You can have multiple relay nodes as you scale up your stake pool architecture. Simply create **relaynodeN** and adapt the guide instructions accordingly.
 {% endhint %}
 
-On your **relaynode1,** run ****with the following after updating with your block producer's public IP address.
+On your **relaynode1,** run \*\*\*\*with the following after updating with your block producer's public IP address.
 
 {% tabs %}
 {% tab title="relaynode1" %}
+
 ```bash
-cat > $NODE_HOME/${NODE_CONFIG}-topology.json << EOF 
+cat > $NODE_HOME/${NODE_CONFIG}-topology.json << EOF
  {
     "Producers": [
       {
@@ -318,6 +321,7 @@ cat > $NODE_HOME/${NODE_CONFIG}-topology.json << EOF
   }
 EOF
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -332,26 +336,28 @@ Valency tells the node how many connections to keep open. Only DNS addresses are
 ## 🔏 6. Configure the air-gapped offline machine
 
 {% hint style="info" %}
-An air-gapped offline machine is called your cold environment. 
+An air-gapped offline machine is called your cold environment.
 
-* Protects against key-logging attacks, malware/virus based attacks and other firewall or security exploits. 
-* Physically isolated from the rest of your network. 
-* Must not have a network connection, wired or wireless. 
-* Is not a VM on a machine with a network connection.
-* Learn more about [air-gapping at wikipedia](https://en.wikipedia.org/wiki/Air_gap_%28networking%29).
-{% endhint %}
+-   Protects against key-logging attacks, malware/virus based attacks and other firewall or security exploits.
+-   Physically isolated from the rest of your network.
+-   Must not have a network connection, wired or wireless.
+-   Is not a VM on a machine with a network connection.
+-   Learn more about [air-gapping at wikipedia](https://en.wikipedia.org/wiki/Air_gap_%28networking%29).
+    {% endhint %}
 
 {% tabs %}
 {% tab title="air-gapped offline machine" %}
+
 ```bash
 echo export NODE_HOME=$HOME/cardano-my-node >> $HOME/.bashrc
 source $HOME/.bashrc
 mkdir -p $NODE_HOME
 ```
+
 {% endtab %}
 {% endtabs %}
 
-Copy from your **hot environment**, also known as your block producer node, a copy of the **`cardano-cli`** binaries to your **cold environment**, this air-gapped offline machine. 
+Copy from your **hot environment**, also known as your block producer node, a copy of the **`cardano-cli`** binaries to your **cold environment**, this air-gapped offline machine.
 
 {% hint style="danger" %}
 In order to remain a true air-gapped environment, you must move files physically between your cold and hot environments with USB keys or other removable media.
@@ -363,8 +369,9 @@ The startup script contains all the variables needed to run a cardano-node such 
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
-cat > $NODE_HOME/startBlockProducingNode.sh << EOF 
+cat > $NODE_HOME/startBlockProducingNode.sh << EOF
 #!/bin/bash
 DIRECTORY=$NODE_HOME
 PORT=6000
@@ -376,11 +383,13 @@ CONFIG=\${DIRECTORY}/${NODE_CONFIG}-config.json
 cardano-node run --topology \${TOPOLOGY} --database-path \${DB_PATH} --socket-path \${SOCKET_PATH} --host-addr \${HOSTADDR} --port \${PORT} --config \${CONFIG}
 EOF
 ```
+
 {% endtab %}
 
 {% tab title="relaynode1" %}
+
 ```bash
-cat > $NODE_HOME/startRelayNode1.sh << EOF 
+cat > $NODE_HOME/startRelayNode1.sh << EOF
 #!/bin/bash
 DIRECTORY=$NODE_HOME
 PORT=6000
@@ -392,6 +401,7 @@ CONFIG=\${DIRECTORY}/${NODE_CONFIG}-config.json
 cardano-node run --topology \${TOPOLOGY} --database-path \${DB_PATH} --socket-path \${SOCKET_PATH} --host-addr \${HOSTADDR} --port \${PORT} --config \${CONFIG}
 EOF
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -399,39 +409,45 @@ Add execute permissions to the startup script.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 chmod +x $NODE_HOME/startBlockProducingNode.sh
 ```
+
 {% endtab %}
 
 {% tab title="relaynode1" %}
+
 ```bash
-chmod +x $NODE_HOME/startRelayNode1.sh 
+chmod +x $NODE_HOME/startRelayNode1.sh
 ```
+
 {% endtab %}
 {% endtabs %}
 
 Run the following to create a **systemd unit file** to define your`cardano-node.service` configuration.
 
 {% hint style="info" %}
+
 #### 🍰 Benefits of using systemd for your stake pool
 
 1. Auto-start your stake pool when the computer reboots due to maintenance, power outage, etc.
 2. Automatically restart crashed stake pool processes.
 3. Maximize your stake pool up-time and performance.
-{% endhint %}
+   {% endhint %}
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
-cat > $NODE_HOME/cardano-node.service << EOF 
+cat > $NODE_HOME/cardano-node.service << EOF
 # The Cardano node service (part of systemd)
-# file: /etc/systemd/system/cardano-node.service 
+# file: /etc/systemd/system/cardano-node.service
 
 [Unit]
 Description     = Cardano node service
 Wants           = network-online.target
-After           = network-online.target 
+After           = network-online.target
 
 [Service]
 User            = ${USER}
@@ -449,18 +465,20 @@ RestartSec=5
 WantedBy	= multi-user.target
 EOF
 ```
+
 {% endtab %}
 
 {% tab title="relaynode1" %}
+
 ```bash
-cat > $NODE_HOME/cardano-node.service << EOF 
+cat > $NODE_HOME/cardano-node.service << EOF
 # The Cardano node service (part of systemd)
-# file: /etc/systemd/system/cardano-node.service 
+# file: /etc/systemd/system/cardano-node.service
 
 [Unit]
 Description     = Cardano node service
 Wants           = network-online.target
-After           = network-online.target 
+After           = network-online.target
 
 [Service]
 User            = ${USER}
@@ -478,6 +496,7 @@ RestartSec=5
 WantedBy	= multi-user.target
 EOF
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -544,15 +563,19 @@ Start your stake pool with systemctl and begin syncing the blockchain!
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 sudo systemctl start cardano-node
 ```
+
 {% endtab %}
 
 {% tab title="relaynode1" %}
+
 ```bash
 sudo systemctl start cardano-node
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -602,25 +625,27 @@ Congratulations! Your node is running successfully now. Let it sync up.
 
 The block-producer node requires you to create 3 keys as defined in the [Shelley ledger specs](https://hydra.iohk.io/build/2473732/download/1/ledger-spec.pdf):
 
-* stake pool cold key \(node.cert\)
-* stake pool hot key \(kes.skey\)
-* stake pool VRF key \(vrf.skey\)
+-   stake pool cold key \(node.cert\)
+-   stake pool hot key \(kes.skey\)
+-   stake pool VRF key \(vrf.skey\)
 
 First, make a KES key pair.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cd $NODE_HOME
 cardano-cli node key-gen-KES \
     --verification-key-file kes.vkey \
     --signing-key-file kes.skey
 ```
+
 {% endtab %}
 {% endtabs %}
 
 {% hint style="info" %}
-KES \(key evolving signature\) keys are created to secure your stake pool against hackers who might compromise your keys. 
+KES \(key evolving signature\) keys are created to secure your stake pool against hackers who might compromise your keys.
 
 **On mainnet, you will need to regenerate the KES key every 90 days.**
 {% endhint %}
@@ -633,10 +658,12 @@ Make a directory to store your cold keys
 
 {% tabs %}
 {% tab title="Air-gapped offline machine" %}
+
 ```text
 mkdir $HOME/cold-keys
 pushd $HOME/cold-keys
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -644,12 +671,14 @@ Make a set of cold keys and create the cold counter file.
 
 {% tabs %}
 {% tab title="air-gapped offline machine" %}
+
 ```bash
 cardano-cli node key-gen \
     --cold-verification-key-file node.vkey \
     --cold-signing-key-file node.skey \
     --operational-certificate-issue-counter node.counter
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -661,11 +690,13 @@ Determine the number of slots per KES period from the genesis file.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 pushd +1
 slotsPerKESPeriod=$(cat $NODE_HOME/${NODE_CONFIG}-shelley-genesis.json | jq -r '.slotsPerKESPeriod')
 echo slotsPerKESPeriod: ${slotsPerKESPeriod}
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -675,10 +706,12 @@ Before continuing, your node must be fully synchronized to the blockchain. Other
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 slotNo=$(cardano-cli query tip --mainnet | jq -r '.slotNo')
 echo slotNo: ${slotNo}
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -686,18 +719,20 @@ Find the kesPeriod by dividing the slot tip number by the slotsPerKESPeriod.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 kesPeriod=$((${slotNo} / ${slotsPerKESPeriod}))
 echo kesPeriod: ${kesPeriod}
 startKesPeriod=${kesPeriod}
 echo startKesPeriod: ${startKesPeriod}
 ```
+
 {% endtab %}
 {% endtabs %}
 
-With this calculation, you can generate a operational certificate for your pool. 
+With this calculation, you can generate a operational certificate for your pool.
 
-Copy **kes.vkey** to your **cold environment**. 
+Copy **kes.vkey** to your **cold environment**.
 
 Change the &lt;**startKesPeriod&gt;** value accordingly.
 
@@ -707,6 +742,7 @@ Stake pool operators must provide an operational certificate to verify that the 
 
 {% tabs %}
 {% tab title="air-gapped offline machine" %}
+
 ```bash
 cardano-cli node issue-op-cert \
     --kes-verification-key-file kes.vkey \
@@ -715,6 +751,7 @@ cardano-cli node issue-op-cert \
     --kes-period <startKesPeriod> \
     --out-file node.cert
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -724,11 +761,13 @@ Make a VRF key pair.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli node key-gen-VRF \
     --verification-key-file vrf.vkey \
     --signing-key-file vrf.skey
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -738,13 +777,15 @@ Update vrf key permissions to read-only.
 chmod 400 vrf.skey
 ```
 
-Stop your ****stake pool by running the following:
+Stop your \*\*\*\*stake pool by running the following:
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 sudo systemctl stop cardano-node
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -752,8 +793,9 @@ Update your startup script with the new **KES, VRF and Operation Certificate.**
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
-cat > $NODE_HOME/startBlockProducingNode.sh << EOF 
+cat > $NODE_HOME/startBlockProducingNode.sh << EOF
 DIRECTORY=$NODE_HOME
 PORT=6000
 HOSTADDR=0.0.0.0
@@ -767,6 +809,7 @@ CERT=\${DIRECTORY}/node.cert
 cardano-node run --topology \${TOPOLOGY} --database-path \${DB_PATH} --socket-path \${SOCKET_PATH} --host-addr \${HOSTADDR} --port \${PORT} --config \${CONFIG} --shelley-kes-key \${KES} --shelley-vrf-key \${VRF} --shelley-operational-certificate \${CERT}
 EOF
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -778,12 +821,14 @@ Now start your block producer node.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 sudo systemctl start cardano-node
 
 # Monitor with gLiveView
 ./gLiveView.sh
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -799,12 +844,14 @@ Wait for the block-producing node to start syncing before continuing if you get 
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli query protocol-parameters \
     --mainnet \
     --allegra-era \
     --out-file params.json
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -817,14 +864,14 @@ There are two ways to create your `payment` and `stake` key pair. Pick the one t
 {% hint style="danger" %}
 🔥 **Critical Operational Security Advice:** `payment` and `stake` keys must be generated and used to build transactions in an cold environment. In other words, your **air-gapped offline machine**. Copy `cardano-cli` binary over to your offline machine and run the CLI method or mnemonic method. The only steps performed online in a hot environment are those steps that require live data. Namely the follow type of steps:
 
-* querying the current slot tip
-* querying the balance of an address
-* submitting a transaction
-{% endhint %}
+-   querying the current slot tip
+-   querying the balance of an address
+-   submitting a transaction
+    {% endhint %}
 
 {% tabs %}
 {% tab title="CLI Method" %}
-Create a new payment key pair:  `payment.skey` & `payment.vkey`
+Create a new payment key pair: `payment.skey` & `payment.vkey`
 
 ```bash
 ###
@@ -836,7 +883,7 @@ cardano-cli address key-gen \
     --signing-key-file payment.skey
 ```
 
- Create a new stake address key pair: `stake.skey` & `stake.vkey`
+Create a new stake address key pair: `stake.skey` & `stake.vkey`
 
 ```bash
 ###
@@ -871,6 +918,7 @@ cardano-cli address build \
     --out-file payment.addr \
     --mainnet
 ```
+
 {% endtab %}
 
 {% tab title="Mnemonic Method" %}
@@ -927,7 +975,7 @@ Create`extractPoolStakingKeys.sh` script.
 ### On air-gapped offline machine,
 ###
 cat > extractPoolStakingKeys.sh << HERE
-#!/bin/bash 
+#!/bin/bash
 
 CADDR=\${CADDR:=\$( which cardano-address )}
 [[ -z "\$CADDR" ]] && ( echo "cardano-address cannot be found, exiting..." >&2 ; exit 127 )
@@ -937,14 +985,14 @@ CCLI=\${CCLI:=\$( which cardano-cli )}
 
 OUT_DIR="\$1"
 [[ -e "\$OUT_DIR"  ]] && {
-       	echo "The \"\$OUT_DIR\" is already exist delete and run again." >&2 
+       	echo "The \"\$OUT_DIR\" is already exist delete and run again." >&2
        	exit 127
 } || mkdir -p "\$OUT_DIR" && pushd "\$OUT_DIR" >/dev/null
 
 shift
 MNEMONIC="\$*"
 
-# Generate the master key from mnemonics and derive the stake account keys 
+# Generate the master key from mnemonics and derive the stake account keys
 # as extended private and public keys (xpub, xprv)
 echo "\$MNEMONIC" |\
 "\$CADDR" key from-recovery-phrase Shelley > root.prv
@@ -969,7 +1017,7 @@ echo "Generated from 1852H/1815H/0H/{0,2}/0"
 cat base.addr_candidate
 echo
 
-# XPrv/XPub conversion to normal private and public key, keep in mind the 
+# XPrv/XPub conversion to normal private and public key, keep in mind the
 # keypars are not a valind Ed25519 signing keypairs.
 TESTNET_MAGIC="--testnet-magic 42"
 MAINNET_MAGIC="--mainnet"
@@ -1034,7 +1082,7 @@ Extract your keys. Update the command with your mnemonic phrase.
 ```
 
 {% hint style="danger" %}
-**Important**: The **base.addr** and the **base.addr\_candidate** must be the same. Review the screen output.
+**Important**: The **base.addr** and the **base.addr_candidate** must be the same. Review the screen output.
 {% endhint %}
 
 Your new staking keys are in the folder `extractedPoolKeys/`
@@ -1074,7 +1122,7 @@ Awesome. Now you can track your pool rewards in your wallet.
 {% endtab %}
 {% endtabs %}
 
-Next step is to fund your payment address. 
+Next step is to fund your payment address.
 
 Copy **payment.addr** to your **hot environment**.
 
@@ -1094,12 +1142,14 @@ Before continuing, your nodes must be fully synchronized to the blockchain. Othe
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli query utxo \
     --address $(cat payment.addr) \
     --allegra-era \
     --mainnet
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1117,11 +1167,13 @@ Create a certificate, `stake.cert`, using the `stake.vkey`
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```text
 cardano-cli stake-address registration-certificate \
     --stake-verification-key-file stake.vkey \
     --out-file stake.cert
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1129,10 +1181,12 @@ You need to find the **tip** of the blockchain to set the **invalid-hereafter** 
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 currentSlot=$(cardano-cli query tip --mainnet | jq -r '.slotNo')
 echo Current Slot: $currentSlot
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1140,6 +1194,7 @@ Find your balance and **UTXOs**.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli query utxo \
     --address $(cat payment.addr) \
@@ -1165,6 +1220,7 @@ txcnt=$(cat balance.out | wc -l)
 echo Total ADA balance: ${total_balance}
 echo Number of UTXOs: ${txcnt}
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1172,10 +1228,12 @@ Find the keyDeposit value.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 keyDeposit=$(cat $NODE_HOME/params.json | jq -r '.keyDeposit')
 echo keyDeposit: $keyDeposit
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1191,6 +1249,7 @@ The **invalid-hereafter** value must be greater than the current tip. In this ex
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli transaction build-raw \
     ${tx_in} \
@@ -1201,6 +1260,7 @@ cardano-cli transaction build-raw \
     --allegra-era \
     --certificate stake.cert
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1208,6 +1268,7 @@ Calculate the current minimum fee:
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 fee=$(cardano-cli transaction calculate-min-fee \
     --tx-body-file tx.tmp \
@@ -1219,6 +1280,7 @@ fee=$(cardano-cli transaction calculate-min-fee \
     --protocol-params-file params.json | awk '{ print $1 }')
 echo fee: $fee
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1230,17 +1292,20 @@ Calculate your change output.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 txOut=$((${total_balance}-${keyDeposit}-${fee}))
 echo Change Output: ${txOut}
 ```
+
 {% endtab %}
 {% endtabs %}
 
-Build your transaction which will register your stake address. 
+Build your transaction which will register your stake address.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli transaction build-raw \
     ${tx_in} \
@@ -1251,15 +1316,17 @@ cardano-cli transaction build-raw \
     --allegra-era \
     --out-file tx.raw
 ```
+
 {% endtab %}
 {% endtabs %}
 
 Copy **tx.raw** to your **cold environment**.
 
-Sign the transaction with both the payment and stake secret keys. 
+Sign the transaction with both the payment and stake secret keys.
 
 {% tabs %}
 {% tab title="air-gapped offline machine" %}
+
 ```bash
 cardano-cli transaction sign \
     --tx-body-file tx.raw \
@@ -1268,6 +1335,7 @@ cardano-cli transaction sign \
     --mainnet \
     --out-file tx.signed
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1277,11 +1345,13 @@ Send the signed transaction.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli transaction submit \
     --tx-file tx.signed \
     --mainnet
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1299,6 +1369,7 @@ Create your pool's metadata with a JSON file. Update with your pool information.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cat > poolMetaData.json << EOF
 {
@@ -1309,6 +1380,7 @@ cat > poolMetaData.json << EOF
 }
 EOF
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1316,9 +1388,11 @@ Calculate the hash of your metadata file.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli stake-pool metadata-hash --pool-metadata-file poolMetaData.json > poolMetaDataHash.txt
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1332,10 +1406,12 @@ Find the minimum pool cost.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 minPoolCost=$(cat $NODE_HOME/params.json | jq -r .minPoolCost)
 echo minPoolCost: ${minPoolCost}
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1343,20 +1419,21 @@ echo minPoolCost: ${minPoolCost}
 minPoolCost is 340000000 lovelace or 340 ADA. Therefore, your `--pool-cost` must be at a minimum this amount.
 {% endhint %}
 
-Create a registration certificate for your stake pool. Update with your **metadata URL** and your **relay node information**. Choose one of the three options available to configure relay nodes -- DNS based, Round Robin DNS based, or IP based. 
+Create a registration certificate for your stake pool. Update with your **metadata URL** and your **relay node information**. Choose one of the three options available to configure relay nodes -- DNS based, Round Robin DNS based, or IP based.
 
 {% hint style="info" %}
 DNS based relays are recommended for simplicity of node management. In other words, you don't need to re-submit this **registration certificate** transaction every time your IP changes. Also you can easily update the DNS to point towards a new IP should you re-locate or re-build a relay node, for example.
 {% endhint %}
 
 {% hint style="info" %}
-#### \*\*\*\*✨ **How to configure multiple relay nodes.** 
+
+#### \*\*\*\*✨ **How to configure multiple relay nodes.**
 
 Update the next operation
 
 `cardano-cli stake-pool registration-certificate`
 
-to be run on your air-gapped offline machine appropriately. 
+to be run on your air-gapped offline machine appropriately.
 
 **DNS based relays, 1 entry per DNS record**
 
@@ -1382,6 +1459,7 @@ to be run on your air-gapped offline machine appropriately.
     --pool-relay-port 6000 \
     --pool-relay-ipv4 <your second relay node public IP address> \
 ```
+
 {% endhint %}
 
 {% hint style="warning" %}
@@ -1390,6 +1468,7 @@ to be run on your air-gapped offline machine appropriately.
 
 {% tabs %}
 {% tab title="air-gapped offline machine" %}
+
 ```bash
 cardano-cli stake-pool registration-certificate \
     --cold-verification-key-file $HOME/cold-keys/node.vkey \
@@ -1406,11 +1485,12 @@ cardano-cli stake-pool registration-certificate \
     --metadata-hash $(cat poolMetaDataHash.txt) \
     --out-file pool.cert
 ```
+
 {% endtab %}
 {% endtabs %}
 
 {% hint style="info" %}
-Here we are pledging 100 ADA with a fixed pool cost of 345 ADA and a pool margin of 15%. 
+Here we are pledging 100 ADA with a fixed pool cost of 345 ADA and a pool margin of 15%.
 {% endhint %}
 
 Copy **pool.cert** to your **hot environment.**
@@ -1419,12 +1499,14 @@ Pledge stake to your stake pool.
 
 {% tabs %}
 {% tab title="air-gapped offline machine" %}
+
 ```bash
 cardano-cli stake-address delegation-certificate \
     --stake-verification-key-file stake.vkey \
     --cold-verification-key-file $HOME/cold-keys/node.vkey \
     --out-file deleg.cert
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1437,20 +1519,22 @@ This operation creates a delegation certificate which delegates funds from all s
 {% hint style="info" %}
 A stake pool owner's promise to fund their own pool is called **Pledge**.
 
-* Your balance needs to be greater than the pledge amount.
-* You pledge funds are not moved anywhere. In this guide's example, the pledge remains in the stake pool's owner keys, specifically `payment.addr`
-* Failing to fulfill pledge will result in missed block minting opportunities and your delegators would miss rewards. 
-* Your pledge is not locked up. You are free to transfer your funds.
-{% endhint %}
+-   Your balance needs to be greater than the pledge amount.
+-   You pledge funds are not moved anywhere. In this guide's example, the pledge remains in the stake pool's owner keys, specifically `payment.addr`
+-   Failing to fulfill pledge will result in missed block minting opportunities and your delegators would miss rewards.
+-   Your pledge is not locked up. You are free to transfer your funds.
+    {% endhint %}
 
 You need to find the **tip** of the blockchain to set the **invalid-hereafter** parameter properly.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 currentSlot=$(cardano-cli query tip --mainnet | jq -r '.slotNo')
 echo Current Slot: $currentSlot
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1458,6 +1542,7 @@ Find your balance and **UTXOs**.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli query utxo \
     --address $(cat payment.addr) \
@@ -1483,6 +1568,7 @@ txcnt=$(cat balance.out | wc -l)
 echo Total ADA balance: ${total_balance}
 echo Number of UTXOs: ${txcnt}
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1490,21 +1576,24 @@ Find the deposit fee for a pool.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 poolDeposit=$(cat $NODE_HOME/params.json | jq -r '.poolDeposit')
 echo poolDeposit: $poolDeposit
 ```
+
 {% endtab %}
 {% endtabs %}
 
 Run the build-raw transaction command.
 
 {% hint style="info" %}
-The **invalid-hereafter** value must be greater than the current tip. In this example, we use current slot + 10000. 
+The **invalid-hereafter** value must be greater than the current tip. In this example, we use current slot + 10000.
 {% endhint %}
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli transaction build-raw \
     ${tx_in} \
@@ -1516,6 +1605,7 @@ cardano-cli transaction build-raw \
     --allegra-era \
     --out-file tx.tmp
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1523,6 +1613,7 @@ Calculate the minimum fee:
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 fee=$(cardano-cli transaction calculate-min-fee \
     --tx-body-file tx.tmp \
@@ -1534,6 +1625,7 @@ fee=$(cardano-cli transaction calculate-min-fee \
     --protocol-params-file params.json | awk '{ print $1 }')
 echo fee: $fee
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1545,17 +1637,20 @@ Calculate your change output.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 txOut=$((${total_balance}-${poolDeposit}-${fee}))
 echo txOut: ${txOut}
 ```
+
 {% endtab %}
 {% endtabs %}
 
-Build the transaction. 
+Build the transaction.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli transaction build-raw \
     ${tx_in} \
@@ -1567,15 +1662,17 @@ cardano-cli transaction build-raw \
     --allegra-era \
     --out-file tx.raw
 ```
+
 {% endtab %}
 {% endtabs %}
 
 Copy **tx.raw** to your **cold environment.**
 
-Sign the transaction. 
+Sign the transaction.
 
 {% tabs %}
 {% tab title="air-gapped offline machine" %}
+
 ```bash
 cardano-cli transaction sign \
     --tx-body-file tx.raw \
@@ -1585,6 +1682,7 @@ cardano-cli transaction sign \
     --mainnet \
     --out-file tx.signed
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1594,41 +1692,47 @@ Send the transaction.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli transaction submit \
     --tx-file tx.signed \
     --mainnet
 ```
+
 {% endtab %}
 {% endtabs %}
 
-## 🐣 13. Locate your Stake pool ID and verify everything is working 
+## 🐣 13. Locate your Stake pool ID and verify everything is working
 
 Your stake pool ID can be computed with:
 
 {% tabs %}
 {% tab title="air-gapped offline machine" %}
+
 ```bash
 cardano-cli stake-pool id --cold-verification-key-file $HOME/cold-keys/node.vkey --output-format hex > stakepoolid.txt
 cat stakepoolid.txt
 ```
+
 {% endtab %}
 {% endtabs %}
 
 Copy **stakepoolid.txt** to your **hot environment.**
 
-Now that you have your stake pool ID,  verify it's included in the blockchain.
+Now that you have your stake pool ID, verify it's included in the blockchain.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli query ledger-state --mainnet --allegra-era | grep publicKey | grep $(cat stakepoolid.txt)
 ```
+
 {% endtab %}
 {% endtabs %}
 
 {% hint style="info" %}
-A non-empty string return means you're registered! 👏 
+A non-empty string return means you're registered! 👏
 {% endhint %}
 
 With your stake pool ID, now you can find your data on block explorers such as [https://pooltool.io/](https://pooltool.io/)
@@ -1641,11 +1745,12 @@ Shelley has been launched without peer-to-peer \(p2p\) node discovery so that me
 
 There are two ways to configure your topology files.
 
-* **topologyUpdate.sh method** is automated and works after 4 hours. 
-* **Pooltool.io method** gives you control over who your nodes connect to.
+-   **topologyUpdate.sh method** is automated and works after 4 hours.
+-   **Pooltool.io method** gives you control over who your nodes connect to.
 
 {% tabs %}
 {% tab title="topologyUpdater.sh Method" %}
+
 ### 🚀 Publishing your Relay Node with topologyUpdater.sh
 
 {% hint style="info" %}
@@ -1661,7 +1766,7 @@ Create the `topologyUpdater.sh` script which publishes your node information to 
 cat > $NODE_HOME/topologyUpdater.sh << EOF
 #!/bin/bash
 # shellcheck disable=SC2086,SC2034
- 
+
 USERNAME=$(whoami)
 CNODE_PORT=6000 # must match your relay node port as set in the startup command
 CNODE_HOSTNAME="CHANGE ME"  # optional. must resolve to the IP you are requesting from
@@ -1674,12 +1779,12 @@ CNODE_VALENCY=1   # optional for multi-IP hostnames
 NWMAGIC=\$(jq -r .networkMagic < \$GENESIS_JSON)
 [[ "\${NETWORKID}" = "Mainnet" ]] && HASH_IDENTIFIER="--mainnet" || HASH_IDENTIFIER="--testnet-magic \${NWMAGIC}"
 [[ "\${NWMAGIC}" = "764824073" ]] && NETWORK_IDENTIFIER="--mainnet" || NETWORK_IDENTIFIER="--testnet-magic \${NWMAGIC}"
- 
+
 export PATH="\${CNODE_BIN}:\${PATH}"
 export CARDANO_NODE_SOCKET_PATH="\${CNODE_HOME}/db/socket"
- 
+
 blockNo=\$(/usr/local/bin/cardano-cli query tip \${NETWORK_IDENTIFIER} | jq -r .blockNo )
- 
+
 # Note:
 # if you run your node in IPv4/IPv6 dual stack network configuration and want announced the
 # IPv4 address only please add the -4 parameter to the curl command below  (curl -4 -s ...)
@@ -1692,7 +1797,7 @@ fi
 if [ ! -d \${CNODE_LOG_DIR} ]; then
   mkdir -p \${CNODE_LOG_DIR};
 fi
- 
+
 curl -s "https://api.clio.one/htopology/v1/?port=\${CNODE_PORT}&blockNo=\${blockNo}&valency=\${CNODE_VALENCY}&magic=\${NWMAGIC}\${T_HOSTNAME}" | tee -a \$CNODE_LOG_DIR/topologyUpdater_lastresult.json
 EOF
 ```
@@ -1708,7 +1813,7 @@ chmod +x topologyUpdater.sh
 ./topologyUpdater.sh
 ```
 
-When the `topologyUpdater.sh` runs successfully, you will see 
+When the `topologyUpdater.sh` runs successfully, you will see
 
 > `{ "resultcode": "201", "datetime":"2020-07-28 01:23:45", "clientIp": "1.2.3.4", "iptype": 4, "msg": "nice to meet you" }`
 
@@ -1778,6 +1883,7 @@ Don't forget to restart your relay nodes after every time you fetch the topology
 {% endtab %}
 
 {% tab title="Pooltool.io Method" %}
+
 1. Visit [https://pooltool.io/](https://pooltool.io/)
 2. Create an account and login
 3. Search for your stakepool id
@@ -1793,6 +1899,7 @@ You can find your public IP with [https://www.whatismyip.com/](https://www.whati
 ```text
 curl http://ifconfig.me/ip
 ```
+
 {% endhint %}
 
 Add requests for nodes or "buddies" to each of your relay nodes. Make sure you include the IOHK node and your private nodes.
@@ -1811,21 +1918,21 @@ IOHK's node port is:
 
 For example, on relaynode1's buddies you should add **requests** for
 
-* your private BlockProducingNode
-* IOHK's node
-* and any other buddy/friendly nodes your can find or know
+-   your private BlockProducingNode
+-   IOHK's node
+-   and any other buddy/friendly nodes your can find or know
 
 {% hint style="info" %}
 A relay node connection is not established until there is a request and an approval.
 {% endhint %}
 
-For **relaynode1**, create a get\_buddies.sh script to update your topology.json file.
+For **relaynode1**, create a get_buddies.sh script to update your topology.json file.
 
 ```bash
 ###
 ### On relaynode1
 ###
-cat > $NODE_HOME/get_buddies.sh << EOF 
+cat > $NODE_HOME/get_buddies.sh << EOF
 #!/usr/bin/env bash
 
 # YOU CAN PASS THESE STRINGS AS ENVIRONMENTAL VARIABLES, OR EDIT THEM IN THE SCRIPT HERE
@@ -1864,16 +1971,16 @@ fi
 EOF
 ```
 
-For each of your relay nodes, update the following variables from pooltool.io into your get\_buddies.sh file
+For each of your relay nodes, update the following variables from pooltool.io into your get_buddies.sh file
 
-* PT\_MY\_POOL\_ID 
-* PT\_MY\_API\_KEY 
-* PT\_MY\_NODE\_ID
+-   PT_MY_POOL_ID
+-   PT_MY_API_KEY
+-   PT_MY_NODE_ID
 
-Update your get\_buddies.sh scripts with this information.
+Update your get_buddies.sh scripts with this information.
 
 {% hint style="info" %}
-Use **nano** to edit your files. 
+Use **nano** to edit your files.
 
 `nano $NODE_HOME/relaynode1/get_buddies.sh`
 {% endhint %}
@@ -1899,13 +2006,13 @@ sudo systemctl restart cardano-node
 ```
 
 {% hint style="info" %}
-As your REQUESTS are approved, you must re-run the get\_buddies.sh script to pull the latest topology data. Restart your relay nodes afterwards.
+As your REQUESTS are approved, you must re-run the get_buddies.sh script to pull the latest topology data. Restart your relay nodes afterwards.
 {% endhint %}
 {% endtab %}
 {% endtabs %}
 
 {% hint style="danger" %}
-\*\*\*\*🔥 **Critical step:** In order to be a functional stake pool ready to mint blocks, you must see the **Processed  TX** number increasing in gLiveView. If not, review your topology file and ensure your **peers** \(or relay buddies\) are well connected and ideally, minted some blocks.
+\*\*\*\*🔥 **Critical step:** In order to be a functional stake pool ready to mint blocks, you must see the **Processed TX** number increasing in gLiveView. If not, review your topology file and ensure your **peers** \(or relay buddies\) are well connected and ideally, minted some blocks.
 {% endhint %}
 
 ![Processed TX must be positive in gLiveView. Must also have in / out connections.](../../../.gitbook/assets/in-out-connections.png)
@@ -1939,12 +2046,14 @@ After the epoch is over and assuming you successfully minted blocks, check with 
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli query stake-address-info \
  --address $(cat stake.addr) \
  --allegra-era \
  --mainnet
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1952,21 +2061,25 @@ cardano-cli query stake-address-info \
 
 Prometheus is a monitoring platform that collects metrics from monitored targets by scraping metrics HTTP endpoints on these targets. [Official documentation is available here.](https://prometheus.io/docs/introduction/overview/) Grafana is a dashboard used to visualize the collected data.
 
-###  🐣 16.1 Installation
+### 🐣 16.1 Installation
 
 Install prometheus and prometheus node exporter.
 
 {% tabs %}
 {% tab title="relaynode1" %}
+
 ```
-sudo apt-get install -y prometheus prometheus-node-exporter 
+sudo apt-get install -y prometheus prometheus-node-exporter
 ```
+
 {% endtab %}
 
 {% tab title="block producer node" %}
+
 ```bash
-sudo apt-get install -y prometheus-node-exporter 
+sudo apt-get install -y prometheus-node-exporter
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -1974,26 +2087,32 @@ Install grafana.
 
 {% tabs %}
 {% tab title="relaynode1" %}
+
 ```bash
 wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
 ```
+
 {% endtab %}
 {% endtabs %}
 
 {% tabs %}
 {% tab title="relaynode1" %}
+
 ```bash
 echo "deb https://packages.grafana.com/oss/deb stable main" > grafana.list
 sudo mv grafana.list /etc/apt/sources.list.d/grafana.list
 ```
+
 {% endtab %}
 {% endtabs %}
 
 {% tabs %}
 {% tab title="relaynode1" %}
+
 ```bash
 sudo apt-get update && sudo apt-get install -y grafana
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2001,17 +2120,21 @@ Enable services so they start automatically.
 
 {% tabs %}
 {% tab title="relaynode1" %}
+
 ```bash
 sudo systemctl enable grafana-server.service
 sudo systemctl enable prometheus.service
 sudo systemctl enable prometheus-node-exporter.service
 ```
+
 {% endtab %}
 
 {% tab title="block producer node" %}
+
 ```
 sudo systemctl enable prometheus-node-exporter.service
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2021,6 +2144,7 @@ Change the **&lt;block producer public ip address&gt;** in the following command
 
 {% tabs %}
 {% tab title="relaynode1" %}
+
 ```bash
 cat > prometheus.yml << EOF
 global:
@@ -2051,6 +2175,7 @@ scrape_configs:
 EOF
 sudo mv prometheus.yml /etc/prometheus/prometheus.yml
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2058,11 +2183,13 @@ Finally, restart the services.
 
 {% tabs %}
 {% tab title="relaynode1" %}
+
 ```text
 sudo systemctl restart grafana-server.service
 sudo systemctl restart prometheus.service
 sudo systemctl restart prometheus-node-exporter.service
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2070,34 +2197,40 @@ Verify that the services are running properly:
 
 {% tabs %}
 {% tab title="relaynode1" %}
+
 ```text
 sudo systemctl status grafana-server.service prometheus.service prometheus-node-exporter.service
 ```
+
 {% endtab %}
 {% endtabs %}
 
-Update `${NODE_CONFIG}-config.json` config files with new `hasEKG`  and `hasPrometheus` ports.
+Update `${NODE_CONFIG}-config.json` config files with new `hasEKG` and `hasPrometheus` ports.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cd $NODE_HOME
 
-sed -i ${NODE_CONFIG}-config.json -e "s/127.0.0.1/0.0.0.0/g"  
+sed -i ${NODE_CONFIG}-config.json -e "s/127.0.0.1/0.0.0.0/g"
 ```
+
 {% endtab %}
 
 {% tab title="relaynodeN" %}
+
 ```bash
 cd $NODE_HOME
 
-sed -i ${NODE_CONFIG}-config.json -e "s/127.0.0.1/0.0.0.0/g"  
+sed -i ${NODE_CONFIG}-config.json -e "s/127.0.0.1/0.0.0.0/g"
 ```
+
 {% endtab %}
 {% endtabs %}
 
 {% hint style="info" %}
-Port forwarding and firewall config: 
+Port forwarding and firewall config:
 
 On block producer node \(or relaynodeN\), you need to open ports 12798 and 9100
 
@@ -2108,19 +2241,23 @@ Stop and restart your stake pool.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 sudo systemctl restart cardano-node
 ```
+
 {% endtab %}
 
 {% tab title="relaynode1" %}
+
 ```bash
 sudo systemctl restart cardano-node
 ```
+
 {% endtab %}
 {% endtabs %}
 
-### 📶 16.2 Setting up Grafana Dashboards 
+### 📶 16.2 Setting up Grafana Dashboards
 
 1. On relaynode1, open [http://localhost:3000](http://localhost:3000) or http://&lt;your relaynode1 ip address&gt;:3000 in your local browser. You may need to open up port 3000 in your router and/or firewall.
 2. Login with **admin** / **admin**
@@ -2146,14 +2283,14 @@ Congratulations. You're basically done. More great operational and maintenance t
 ### 😊 17.1 Donation Tip Jar
 
 {% hint style="info" %}
-Did you find our guide useful? Let us know with a tip and we'll keep updating it. Bonus points if you use [section 18.9's instructions](./#18-9-send-a-simple-transaction-example). 🙏 🚀 
+Did you find our guide useful? Let us know with a tip and we'll keep updating it. Bonus points if you use [section 18.9's instructions](./#18-9-send-a-simple-transaction-example). 🙏 🚀
 
-It really energizes us to keep creating the best crypto guides. 
+It really energizes us to keep creating the best crypto guides.
 
-Use [cointr.ee to find our donation ](https://cointr.ee/coincashew)addresses. 🙏 
+Use [cointr.ee to find our donation ](https://cointr.ee/coincashew)addresses. 🙏
 {% endhint %}
 
-Thank you for supporting Cardano and us! Please use the below cointr.ee link. 😊 
+Thank you for supporting Cardano and us! Please use the below cointr.ee link. 😊
 
 {% embed url="https://cointr.ee/coincashew" %}
 
@@ -2163,47 +2300,47 @@ Thanks to all 17000+ of you, the Cardano hodlers, buidlers, stakers, and pool op
 
 ### \*\*\*\*💬 17**.3 Telegram and Discord Chat Channel**
 
- Hang out and chat with our telegram stake pool community at [https://t.me/coincashew](https://t.me/coincashew)
+Hang out and chat with our telegram stake pool community at [https://t.me/coincashew](https://t.me/coincashew)
 
-Discord community located @ [https://discord.gg/w8Bx8W2HPW](https://discord.gg/w8Bx8W2HPW) 😃 
+Discord community located @ [https://discord.gg/w8Bx8W2HPW](https://discord.gg/w8Bx8W2HPW) 😃
 
 ### 🙃 17.4 Contributors, Donators and Friendly Stake Pools of CoinCashew
 
 #### ✨ Contributors to the Guide
 
-* 👏 Antonie of CNT for being awesomely helpful with Youtube content and in telegram.
-* 👏 Special thanks to \[[KAZE](https://kaze.network/)\] for the pull requests, sharing a new and improved grafana dashboard, and automatic script contributions.
-* 👏 [The Legend of ₳da \[TLOA\] for translating this guide to Spanish.](https://github.com/tloada/coincashew/tree/master/coins/overview-ada/guide-how-to-build-a-haskell-stakepool-node)
-* 👏 [X-StakePool \[BTBF\] for translating this guide to Japanese.](https://github.com/btbf/coincashew/blob/master/guide-how-to-build-a-haskell-stakepool-node.md)
-* 👏 Chris of OMEGA \| CODEX for security improvements.
-* 👏 Raymond of GROW for topologyUpdater improvements and being awesome.
+-   👏 Antonie of CNT for being awesomely helpful with Youtube content and in telegram.
+-   👏 Special thanks to \[[KAZE](https://kaze.network/)\] for the pull requests, sharing a new and improved grafana dashboard, and automatic script contributions.
+-   👏 [The Legend of ₳da \[TLOA\] for translating this guide to Spanish.](https://github.com/tloada/coincashew/tree/master/coins/overview-ada/guide-how-to-build-a-haskell-stakepool-node)
+-   👏 [X-StakePool \[BTBF\] for translating this guide to Japanese.](https://github.com/btbf/coincashew/blob/master/guide-how-to-build-a-haskell-stakepool-node.md)
+-   👏 Chris of OMEGA \| CODEX for security improvements.
+-   👏 Raymond of GROW for topologyUpdater improvements and being awesome.
 
 #### 💸 Tip Jar Donators
 
-* 😊 BEBOP \| BCOOL
-* 😊 DEW
-* 😊 GROW
-* 😊 Leonardo
-* 😊 PANJ
-* 😊 SQUID
-* 😊 TREE
-* 😊 SAvvY
-* 😊 YOU?! [Hit us up.](https://cointr.ee/coincashew)
+-   😊 BEBOP \| BCOOL
+-   😊 DEW
+-   😊 GROW
+-   😊 Leonardo
+-   😊 PANJ
+-   😊 SQUID
+-   😊 TREE
+-   😊 SAvvY
+-   😊 YOU?! [Hit us up.](https://cointr.ee/coincashew)
 
 #### 🚀CoinCashew's Preferred Stake Pools
 
-* 🌟 CNT
-* 🌟 OMEGA \| CODEX
-* 🌟 BTBF
-* 🌟 TLOA
-* 🌟 KAZE
-* 🌟 BEBOP \| BCOOL
-* 🌟 DEW
-* 🌟 GROW
-* ⭐ PANJ
-* 🌟 SQUID
-* 🌟 TREE
-* ⭐ SAvvY
+-   🌟 CNT
+-   🌟 OMEGA \| CODEX
+-   🌟 BTBF
+-   🌟 TLOA
+-   🌟 KAZE
+-   🌟 BEBOP \| BCOOL
+-   🌟 DEW
+-   🌟 GROW
+-   ⭐ PANJ
+-   🌟 SQUID
+-   🌟 TREE
+-   ⭐ SAvvY
 
 ### 📚 17.5 Reference Material
 
@@ -2237,6 +2374,7 @@ When it's time to issue a new operational certificate, run the following to find
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cd $NODE_HOME
 slotNo=$(cardano-cli query tip --mainnet | jq -r '.slotNo')
@@ -2245,6 +2383,7 @@ kesPeriod=$((${slotNo} / ${slotsPerKESPeriod}))
 startKesPeriod=${kesPeriod}
 echo startKesPeriod: ${startKesPeriod}
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2252,12 +2391,14 @@ Make a new KES key pair.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cd $NODE_HOME
 cardano-cli node key-gen-KES \
     --verification-key-file kes.vkey \
     --signing-key-file kes.skey
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2267,6 +2408,7 @@ Create the new `node.cert` file with the following command. Update `<startKesPer
 
 {% tabs %}
 {% tab title="air-gapped offline machine" %}
+
 ```bash
 cd $NODE_HOME
 chmod u+rwx $HOME/cold-keys
@@ -2278,6 +2420,7 @@ cardano-cli node issue-op-cert \
     --out-file node.cert
 chmod a-rwx $HOME/cold-keys
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2289,22 +2432,26 @@ Stop and restart your block producer node to complete this procedure.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```
 sudo systemctl restart cardano-node
 ```
+
 {% endtab %}
 
 {% tab title="manual" %}
+
 ```bash
 cd $NODE_HOME
 killall -s 2 cardano-node
 ./startBlockProducingNode.sh
 ```
+
 {% endtab %}
 {% endtabs %}
 
 {% hint style="info" %}
-\*\*\*\*✨ **Tip:** With your hot keys created, you can remove access to the cold keys for improved security. This protects against accidental deletion, editing, or access. 
+\*\*\*\*✨ **Tip:** With your hot keys created, you can remove access to the cold keys for improved security. This protects against accidental deletion, editing, or access.
 
 To lock,
 
@@ -2317,6 +2464,7 @@ To unlock,
 ```bash
 chmod u+rwx $HOME/cold-keys
 ```
+
 {% endhint %}
 
 ### 🔥 18.2 Resetting the installation
@@ -2354,10 +2502,12 @@ Find the minimum pool cost.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 minPoolCost=$(cat $NODE_HOME/params.json | jq -r .minPoolCost)
 echo minPoolCost: ${minPoolCost}
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2369,9 +2519,11 @@ If you're changing your poolMetaData.json, remember to calculate the hash of you
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```text
 cardano-cli stake-pool metadata-hash --pool-metadata-file poolMetaData.json > poolMetaDataHash.txt
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2385,6 +2537,7 @@ If you have **multiple relay nodes,** [**refer to section 12**](./#12-register-y
 
 {% tabs %}
 {% tab title="air-gapped offline machine" %}
+
 ```bash
 cardano-cli stake-pool registration-certificate \
     --cold-verification-key-file $HOME/cold-keys/node.vkey \
@@ -2401,11 +2554,12 @@ cardano-cli stake-pool registration-certificate \
     --metadata-hash $(cat poolMetaDataHash.txt) \
     --out-file pool.cert
 ```
+
 {% endtab %}
 {% endtabs %}
 
 {% hint style="info" %}
-Here we are pledging 1000 ADA with a fixed pool cost of 345 ADA and a pool margin of 20%. 
+Here we are pledging 1000 ADA with a fixed pool cost of 345 ADA and a pool margin of 20%.
 {% endhint %}
 
 Copy **pool.cert** to your **hot environment.**
@@ -2414,12 +2568,14 @@ Pledge stake to your stake pool.
 
 {% tabs %}
 {% tab title="air-gapped offline machine" %}
+
 ```text
 cardano-cli stake-address delegation-certificate \
     --stake-verification-key-file stake.vkey \
     --cold-verification-key-file $HOME/cold-keys/node.vkey \
     --out-file deleg.cert
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2429,10 +2585,12 @@ You need to find the **tip** of the blockchain to set the **invalid-hereafter** 
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 currentSlot=$(cardano-cli query tip --mainnet | jq -r '.slotNo')
 echo Current Slot: $currentSlot
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2440,6 +2598,7 @@ Find your balance and **UTXOs**.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli query utxo \
     --address $(cat payment.addr) \
@@ -2465,17 +2624,19 @@ txcnt=$(cat balance.out | wc -l)
 echo Total ADA balance: ${total_balance}
 echo Number of UTXOs: ${txcnt}
 ```
+
 {% endtab %}
 {% endtabs %}
 
 Run the build-raw transaction command.
 
 {% hint style="info" %}
-The **invalid-hereafter** value must be greater than the current tip. In this example, we use current slot + 10000. 
+The **invalid-hereafter** value must be greater than the current tip. In this example, we use current slot + 10000.
 {% endhint %}
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli transaction build-raw \
     ${tx_in} \
@@ -2487,6 +2648,7 @@ cardano-cli transaction build-raw \
     --allegra-era \
     --out-file tx.tmp
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2494,6 +2656,7 @@ Calculate the minimum fee:
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 fee=$(cardano-cli transaction calculate-min-fee \
     --tx-body-file tx.tmp \
@@ -2505,6 +2668,7 @@ fee=$(cardano-cli transaction calculate-min-fee \
     --protocol-params-file params.json | awk '{ print $1 }')
 echo fee: $fee
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2512,17 +2676,20 @@ Calculate your change output.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 txOut=$((${total_balance}-${fee}))
 echo txOut: ${txOut}
 ```
+
 {% endtab %}
 {% endtabs %}
 
-Build the transaction. 
+Build the transaction.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli transaction build-raw \
     ${tx_in} \
@@ -2534,15 +2701,17 @@ cardano-cli transaction build-raw \
     --allegra-era \
     --out-file tx.raw
 ```
+
 {% endtab %}
 {% endtabs %}
 
 Copy **tx.raw** to your **cold environment.**
 
-Sign the transaction. 
+Sign the transaction.
 
 {% tabs %}
 {% tab title="air-gapped offline machine" %}
+
 ```bash
 cardano-cli transaction sign \
     --tx-body-file tx.raw \
@@ -2552,6 +2721,7 @@ cardano-cli transaction sign \
     --mainnet \
     --out-file tx.signed
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2561,11 +2731,13 @@ Send the transaction.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli transaction submit \
     --tx-file tx.signed \
     --mainnet
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2573,10 +2745,12 @@ Changes take effect next epoch. After the next epoch transition, verify that you
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli query ledger-state --mainnet --allegra-era --out-file ledger-state.json
 jq -r '.esLState._delegationState._pstate._pParams."'"$(cat stakepoolid.txt)"'"  // empty' ledger-state.json
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2584,8 +2758,8 @@ jq -r '.esLState._delegationState._pstate._pParams."'"$(cat stakepoolid.txt)"'" 
 
 Common use cases can include
 
-* Downloading backups of stake/payment keys
-* Uploading a new operational certificate to the block producer from an offline node
+-   Downloading backups of stake/payment keys
+-   Uploading a new operational certificate to the block producer from an offline node
 
 #### To download files from a node to your local PC
 
@@ -2625,9 +2799,11 @@ Make sure the ITN's `jcli` binaries are present in `$NODE_HOME`. Use `jcli` to s
 
 {% tabs %}
 {% tab title="air-gapped offline machine" %}
+
 ```bash
 ./jcli key sign --secret-key itn_owner.skey stakepoolid.txt --output stakepoolid.sig
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2637,9 +2813,11 @@ Find your pool id witness with the following command.
 
 {% tabs %}
 {% tab title="air-gapped offline machine" %}
+
 ```text
 cat stakepoolid.sig
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2663,16 +2841,18 @@ sed -i ${NODE_CONFIG}-config.json \
 
 ### 💸 18.9 Send a simple transaction example
 
-Let's walk through an example to send **10 ADA** to **CoinCashew's tip address** 🙃 
+Let's walk through an example to send **10 ADA** to **CoinCashew's tip address** 🙃
 
 First, find the **tip** of the blockchain to set the **invalid-hereafter** parameter properly.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 currentSlot=$(cardano-cli query tip --mainnet | jq -r '.slotNo')
 echo Current Slot: $currentSlot
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2680,10 +2860,12 @@ Set the amount to send in lovelaces. ✨ Remember **1 ADA** = **1,000,000 lovela
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 amountToSend=10000000
 echo amountToSend: $amountToSend
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2691,10 +2873,12 @@ Set the destination address which is where you're sending funds to.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 destinationAddress=addr1qxhazv2dp8yvqwyxxlt7n7ufwhw582uqtcn9llqak736ptfyf8d2zwjceymcq6l5gxht0nx9zwazvtvnn22sl84tgkyq7guw7q
 echo destinationAddress: $destinationAddress
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2702,6 +2886,7 @@ Find your balance and **UTXOs**.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli query utxo \
     --address $(cat payment.addr) \
@@ -2727,6 +2912,7 @@ txcnt=$(cat balance.out | wc -l)
 echo Total ADA balance: ${total_balance}
 echo Number of UTXOs: ${txcnt}
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2734,6 +2920,7 @@ Run the build-raw transaction command.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli transaction build-raw \
     ${tx_in} \
@@ -2744,6 +2931,7 @@ cardano-cli transaction build-raw \
     --allegra-era \
     --out-file tx.tmp
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2751,6 +2939,7 @@ Calculate the current minimum fee:
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 fee=$(cardano-cli transaction calculate-min-fee \
     --tx-body-file tx.tmp \
@@ -2762,6 +2951,7 @@ fee=$(cardano-cli transaction calculate-min-fee \
     --protocol-params-file params.json | awk '{ print $1 }')
 echo fee: $fee
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2769,17 +2959,20 @@ Calculate your change output.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 txOut=$((${total_balance}-${fee}-${amountToSend}))
 echo Change Output: ${txOut}
 ```
+
 {% endtab %}
 {% endtabs %}
 
-Build your transaction. 
+Build your transaction.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli transaction build-raw \
     ${tx_in} \
@@ -2790,15 +2983,17 @@ cardano-cli transaction build-raw \
     --allegra-era \
     --out-file tx.raw
 ```
+
 {% endtab %}
 {% endtabs %}
 
 Copy **tx.raw** to your **cold environment.**
 
-Sign the transaction with both the payment and stake secret keys. 
+Sign the transaction with both the payment and stake secret keys.
 
 {% tabs %}
 {% tab title="air-gapped offline machine" %}
+
 ```bash
 cardano-cli transaction sign \
     --tx-body-file tx.raw \
@@ -2806,6 +3001,7 @@ cardano-cli transaction sign \
     --mainnet \
     --out-file tx.signed
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2815,11 +3011,13 @@ Send the signed transaction.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli transaction submit \
     --tx-file tx.signed \
     --mainnet
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2827,12 +3025,14 @@ Check if the funds arrived.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli query utxo \
     --address ${destinationAddress} \
     --allegra-era \
     --mainnet
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2852,7 +3052,7 @@ Do not skimp on this critical step to protect your pool and reputation.
 
 ### 🍰 18.11 Claim your rewards
 
-Let's walk through an example to claim your stake pools rewards. 
+Let's walk through an example to claim your stake pools rewards.
 
 {% hint style="info" %}
 Rewards are accumulated in the `stake.addr` address.
@@ -2862,10 +3062,12 @@ First, find the **tip** of the blockchain to set the **invalid-hereafter** param
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 currentSlot=$(cardano-cli query tip --mainnet | jq -r '.slotNo')
 echo Current Slot: $currentSlot
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2873,6 +3075,7 @@ Set the amount to send in lovelaces. ✨ Remember **1 ADA** = **1,000,000 lovela
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 rewardBalance=$(cardano-cli query stake-address-info \
     --mainnet \
@@ -2880,6 +3083,7 @@ rewardBalance=$(cardano-cli query stake-address-info \
     --address $(cat stake.addr) | jq -r ".[0].rewardAccountBalance")
 echo rewardBalance: $rewardBalance
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2887,10 +3091,12 @@ Set the destination address which is where you're moving your reward to. This ad
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 destinationAddress=$(cat payment.addr)
 echo destinationAddress: $destinationAddress
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2898,6 +3104,7 @@ Find your payment.addr balance, utxos and build the withdrawal string.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli query utxo \
     --address $(cat payment.addr) \
@@ -2925,6 +3132,7 @@ echo Number of UTXOs: ${txcnt}
 
 withdrawalString="$(cat stake.addr)+${rewardBalance}"
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2932,6 +3140,7 @@ Run the build-raw transaction command.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli transaction build-raw \
     ${tx_in} \
@@ -2942,6 +3151,7 @@ cardano-cli transaction build-raw \
     --allegra-era \
     --out-file tx.tmp
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2949,6 +3159,7 @@ Calculate the current minimum fee:
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 fee=$(cardano-cli transaction calculate-min-fee \
     --tx-body-file tx.tmp \
@@ -2960,6 +3171,7 @@ fee=$(cardano-cli transaction calculate-min-fee \
     --protocol-params-file params.json | awk '{ print $1 }')
 echo fee: $fee
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -2967,17 +3179,20 @@ Calculate your change output.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 txOut=$((${total_balance}-${fee}+${rewardBalance}))
 echo Change Output: ${txOut}
 ```
+
 {% endtab %}
 {% endtabs %}
 
-Build your transaction. 
+Build your transaction.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli transaction build-raw \
     ${tx_in} \
@@ -2988,15 +3203,17 @@ cardano-cli transaction build-raw \
     --allegra-era \
     --out-file tx.raw
 ```
+
 {% endtab %}
 {% endtabs %}
 
 Copy **tx.raw** to your **cold environment.**
 
-Sign the transaction with both the payment and stake secret keys. 
+Sign the transaction with both the payment and stake secret keys.
 
 {% tabs %}
 {% tab title="air-gapped offline machine" %}
+
 ```bash
 cardano-cli transaction sign \
     --tx-body-file tx.raw \
@@ -3005,6 +3222,7 @@ cardano-cli transaction sign \
     --mainnet \
     --out-file tx.signed
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -3014,11 +3232,13 @@ Send the signed transaction.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli transaction submit \
     --tx-file tx.signed \
     --mainnet
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -3026,12 +3246,14 @@ Check if the funds arrived.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli query utxo \
     --address ${destinationAddress} \
     --allegra-era \
     --mainnet
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -3040,7 +3262,7 @@ You should see output similar to this showing your updated Lovelace balance with
 ```text
                            TxHash                                 TxIx        Lovelace
 ----------------------------------------------------------------------------------------
-100322a39d02c2ead....  
+100322a39d02c2ead....
 ```
 
 ### 🕒 18.12 Slot Leader Schedule - Find out when your pool will mint blocks
@@ -3053,9 +3275,11 @@ Check if you have python installed.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 python3 --version
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -3063,6 +3287,7 @@ Otherwise, install python3.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```text
 sudo apt-get update
 sudo apt-get install -y software-properties-common
@@ -3070,6 +3295,7 @@ sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt-get update
 sudo apt-get install -y python3.9
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -3077,9 +3303,11 @@ Check if you have pip installed.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 pip3 --version
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -3087,9 +3315,11 @@ Install pip3 if needed.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 sudo apt-get install -y python3-pip
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -3103,14 +3333,16 @@ Verify python and pip are setup correctly before continuing.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 python3 --version
 pip3 --version
 ```
+
 {% endtab %}
 {% endtabs %}
 
-Clone the leaderLog scripts from [papacarp/pooltool.io](https://github.com/papacarp/pooltool.io) git repo. 
+Clone the leaderLog scripts from [papacarp/pooltool.io](https://github.com/papacarp/pooltool.io) git repo.
 
 {% hint style="info" %}
 Official documentation for this LeaderLogs tool can be [read here.](https://github.com/papacarp/pooltool.io/blob/master/leaderLogs/README.md)
@@ -3118,11 +3350,13 @@ Official documentation for this LeaderLogs tool can be [read here.](https://gith
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cd $HOME/git
 git clone https://github.com/papacarp/pooltool.io
 cd pooltool.io/leaderLogs
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -3130,9 +3364,11 @@ Query the ledger state.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli query ledger-state --mainnet --allegra-era --out-file ledger.json
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -3140,10 +3376,12 @@ Calculate your pool's sigma. Sigma represents your pool's share of the active st
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 sigmaValue=$(python3 getSigma.py --pool-id $(cat ${NODE_HOME}/stakepoolid.txt) | tail -n 1 | awk '{ print $2 }')
 echo Sigma: ${sigmaValue}
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -3153,14 +3391,16 @@ Calculate your slot leader schedule.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 python3 leaderLogs.py --pool-id $(cat ${NODE_HOME}/stakepoolid.txt) --sigma ${sigmaValue} --vrf-skey ${NODE_HOME}/vrf.skey
 ```
+
 {% endtab %}
 {% endtabs %}
 
 {% hint style="info" %}
-Set the timezone name to format the schedule's times properly. Use the --tz option. \[Default: America/Los\_Angeles\]'\) [Refer to the official documentation for more info.](https://github.com/papacarp/pooltool.io/blob/master/leaderLogs/README.md#arguments-1)
+Set the timezone name to format the schedule's times properly. Use the --tz option. \[Default: America/Los_Angeles\]'\) [Refer to the official documentation for more info.](https://github.com/papacarp/pooltool.io/blob/master/leaderLogs/README.md#arguments-1)
 {% endhint %}
 
 If your pool is scheduled to mint blocks, you should hopefully see output similar to this. Listed by date and time, this is your slot leader schedule or in other words, when your pool is eligible to mint a block.
@@ -3182,6 +3422,7 @@ Calculate the current epoch.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 startTimeGenesis=$(cat $NODE_HOME/${NODE_CONFIG}-shelley-genesis.json | jq -r .systemStart)
 startTimeSec=$(date --date=${startTimeGenesis} +%s)
@@ -3190,6 +3431,7 @@ epochLength=$(cat $NODE_HOME/${NODE_CONFIG}-shelley-genesis.json | jq -r .epochL
 epoch=$(( (${currentTimeSec}-${startTimeSec}) / ${epochLength} ))
 echo current epoch: ${epoch}
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -3197,6 +3439,7 @@ Find the earliest and latest retirement epoch that your pool can retire.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 eMax=$(cat $NODE_HOME/params.json | jq -r '.eMax')
 echo eMax: ${eMax}
@@ -3207,28 +3450,31 @@ maxRetirementEpoch=$(( ${epoch} + ${eMax} ))
 echo earliest epoch for retirement is: ${minRetirementEpoch}
 echo latest epoch for retirement is: ${maxRetirementEpoch}
 ```
+
 {% endtab %}
 {% endtabs %}
 
 {% hint style="info" %}
 \*\*\*\*🚧 **Example**: if we are in epoch 39 and eMax is 18,
 
-* the earliest epoch for retirement is 40 \( current epoch  + 1\).
-* the latest epoch for retirement is 57 \( eMax + current epoch\). 
+-   the earliest epoch for retirement is 40 \( current epoch + 1\).
+-   the latest epoch for retirement is 57 \( eMax + current epoch\).
 
 Let's pretend we wish to retire as soon as possible in epoch 40.
 {% endhint %}
 
-Create the deregistration certificate and save it as `pool.dereg.`  Update the epoch to your desired retirement epoch, usually the earliest epoch or asap.
+Create the deregistration certificate and save it as `pool.dereg.` Update the epoch to your desired retirement epoch, usually the earliest epoch or asap.
 
 {% tabs %}
 {% tab title="air-gapped offline machine" %}
+
 ```bash
 cardano-cli stake-pool deregistration-certificate \
 --cold-verification-key-file $HOME/cold-keys/node.vkey \
 --epoch <retirementEpoch> \
 --out-file pool.dereg
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -3238,6 +3484,7 @@ Find your balance and **UTXOs**.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli query utxo \
     --address $(cat payment.addr) \
@@ -3263,6 +3510,7 @@ txcnt=$(cat balance.out | wc -l)
 echo Total ADA balance: ${total_balance}
 echo Number of UTXOs: ${txcnt}
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -3270,6 +3518,7 @@ Run the build-raw transaction command.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli transaction build-raw \
     ${tx_in} \
@@ -3280,6 +3529,7 @@ cardano-cli transaction build-raw \
     --allegra-era \
     --out-file tx.tmp
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -3287,6 +3537,7 @@ Calculate the minimum fee:
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 fee=$(cardano-cli transaction calculate-min-fee \
     --tx-body-file tx.tmp \
@@ -3298,6 +3549,7 @@ fee=$(cardano-cli transaction calculate-min-fee \
     --protocol-params-file params.json | awk '{ print $1 }')
 echo fee: $fee
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -3305,17 +3557,20 @@ Calculate your change output.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 txOut=$((${total_balance}-${fee}))
 echo txOut: ${txOut}
 ```
+
 {% endtab %}
 {% endtabs %}
 
-Build the transaction. 
+Build the transaction.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli transaction build-raw \
     ${tx_in} \
@@ -3326,15 +3581,17 @@ cardano-cli transaction build-raw \
     --allegra-era \
     --out-file tx.raw
 ```
+
 {% endtab %}
 {% endtabs %}
 
 Copy **tx.raw** to your **cold environment.**
 
-Sign the transaction. 
+Sign the transaction.
 
 {% tabs %}
 {% tab title="air-gapped offline machine" %}
+
 ```bash
 cardano-cli transaction sign \
     --tx-body-file tx.raw \
@@ -3343,6 +3600,7 @@ cardano-cli transaction sign \
     --mainnet \
     --out-file tx.signed
 ```
+
 {% endtab %}
 {% endtabs %}
 
@@ -3352,16 +3610,18 @@ Send the transaction.
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli transaction submit \
     --tx-file tx.signed \
     --mainnet
 ```
+
 {% endtab %}
 {% endtabs %}
 
 {% hint style="success" %}
-Pool will retire at the end of your specified epoch. In this example, retirement occurs at the end of epoch 40. 
+Pool will retire at the end of your specified epoch. In this example, retirement occurs at the end of epoch 40.
 
 If you have a change of heart, you can create and submit a new registration certificate before the end of epoch 40, which will then overrule the deregistration certificate.
 {% endhint %}
@@ -3370,18 +3630,19 @@ After the retirement epoch, you can verify that the pool was successfully retire
 
 {% tabs %}
 {% tab title="block producer node" %}
+
 ```bash
 cardano-cli query ledger-state --mainnet --allegra-era --out-file ledger-state.json
 jq -r '.esLState._delegationState._pstate._pParams."'"$(cat stakepoolid.txt)"'"  // empty' ledger-state.json
 ```
+
 {% endtab %}
 {% endtabs %}
 
 ## 🚀 20. Onwards and upwards...
 
 {% hint style="success" %}
-Did you find our guide useful? Let us know with a tip and we'll keep updating it. 🙏 🚀 
+Did you find our guide useful? Let us know with a tip and we'll keep updating it. 🙏 🚀
 
-It really energizes us to keep creating the best crypto guides. Use [cointr.ee to find our donation ](https://cointr.ee/coincashew)addresses and share your message. 🙏 
+It really energizes us to keep creating the best crypto guides. Use [cointr.ee to find our donation ](https://cointr.ee/coincashew)addresses and share your message. 🙏
 {% endhint %}
-
